@@ -9,15 +9,23 @@
 <header th:insert="parts/header :: header"></header>
 
 <div class="container mt-5">
-  <h1>Blog site</h1>
-  <div th:each="el: ${posts}" class="alert alert-info mt-2">
-      <h3 th:text="${el.title}"/>
-      <p th:text="${el.anons}"/>
-      <a th:href="@{/blog/{id}(id=${el.id})}" class="btn btn-primary">Detailing</a>
-  </div>
-</div>
-</body>
-</html>
+    <h1>Blog </h1>
+    <div class="d-flex justify-content-between align-items-center">
 
-<!--<a th:text="'/blog/' + ${el.id} + '/edit'"/>detailing</a>-->
-<!--<a th:text="'/blog/' + ${el.id} + '/remove'"/>detailing</a>-->
+        <a href="/blog/add" class="btn btn-success ml-3">Add article</a>
+    </div>
+    <div th:each="el: ${posts}" class="alert alert-info mt-2">
+        <h3>
+            <span>Title: </span>
+            <span th:text="${el.title}">Post Title</span>
+        </h3>
+        <p>
+            <span>Anons: </span>
+            <span class="post-anons" th:text="${el.anons}">Post Anons</span>
+        </p>
+        <a th:href="@{/blog/{id}(id=${el.id})}" class="btn btn-primary">Detailing</a>
+    </div>
+</div>
+
+<header th:insert="parts/footer :: footer"></header>
+</body>

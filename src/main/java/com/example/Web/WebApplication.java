@@ -30,7 +30,7 @@ public class WebApplication {
 //			user.setUserpassword(UUID.randomUUID().toString());
 //
 //			var role=new RoleEntity();
-//			role.setRoleName(ERole.BLOGGER.toString());
+//			role.setRoleName(ERole.ADMIN.toString());
 //
 //			user.addRole(role);
 //			userRepository.save(user);

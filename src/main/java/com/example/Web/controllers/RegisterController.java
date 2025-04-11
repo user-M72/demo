@@ -17,34 +17,24 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/profile")
-public class UserController {
+@RequestMapping("/register")
+public class RegisterController {
 
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-//    @GetMapping
-//    public String profile(Model model) {
-//        List<UserDTO> userList = userRepository.findAll().stream()
-//                .map(userEntity -> new UserDTO(userEntity.getUsername(), userEntity.addRoles()))
-//                .toList();
-//        model.addAttribute("userEntities", userList);
-//        return "/profile";
-//    }
+    PasswordEncoder passwordEncoder;
 
     @GetMapping
-    public String profile(Model model){
+    public String register(Model model){
+        model.addAttribute("message","Registration new user");
         model.addAttribute("roles", roleRepository.findAll());
-        model.addAttribute("userEntities", userRepository.findAll());
-        return "/profile";
+        return "register";
     }
-
     @PostMapping("/saveUser")
-    public String saveUser(@RequestParam String username, @RequestParam String password, @RequestParam List<Long> roles){
+    public String register(@RequestParam String username, @RequestParam String password, @RequestParam List<Long> roles){
 
         // stream api since java 8
         List<RoleEntity> roleList = roles.stream()
@@ -56,7 +46,9 @@ public class UserController {
         userEntity.setUsername(username);
         userEntity.setPassword(passwordEncoder.encode(password));
         userEntity.addRoles(roleList);
+        var role=new RoleEntity();
+        userEntity.addRole(role);
         userRepository.save(userEntity);
-        return "redirect:/profile";
+        return "redirect:/";
     }
 }
