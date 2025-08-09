@@ -28,7 +28,7 @@ public class RegisterController {
     PasswordEncoder passwordEncoder;
 
     @GetMapping
-    public String register(Model model){
+    public String registerShow(Model model){
         model.addAttribute("message","Registration new user");
         model.addAttribute("roles", roleRepository.findAll());
         return "register";
@@ -36,7 +36,7 @@ public class RegisterController {
     @PostMapping("/saveUser")
     public String register(@RequestParam String username, @RequestParam String password, @RequestParam List<Long> roles){
 
-        // stream api since java 8
+
         List<RoleEntity> roleList = roles.stream()
                 .map(roleId -> roleRepository.findById(roleId))
                 .filter(Optional::isPresent)

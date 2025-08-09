@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
 
     public String username;
-    public ERole role;
 
-    public UserDTO(String username, ERole role) {
+    public UserDTO(String username) {
         this.username = username;
-        this.role = role;
+
     }
 }
